@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+	<!--
+  * Please see the included README.md file for license terms and conditions.
+  -->
+
+	<head>
+		<link rel="stylesheet" type="text/css" href="media_button_bar/css/media_button_bar.css">
+		<link rel="stylesheet" type="text/css" href="icon-fonts/icomoon/style.css">
+		<link rel="stylesheet" type="text/css" href="fonts/styles.css">
+		<link rel="stylesheet" type="text/css" href="slate/css/slate.css" class="uib-framework-theme">
+		<meta charset="UTF-8">
+		<title>TU/GRUERO®</title>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+
+		<!--
+  * The "meta viewport" tag (below) helps your app size appropriately to a device's ideal viewport.
+  * Note that Windows device viewports work better when initialized using the @viewport CSS rule.
+  * For a quick overview of "meta viewport" and @viewport, see this article:
+  *   http://webdesign.tutsplus.com/tutorials/htmlcss-tutorials/quick-tip-dont-forget-the-viewport-meta-tag
+  * To see how it works, try your app on a real device with and without a "meta viewport" tag.
+  * Additional useful references include:
+  *   http://www.quirksmode.org/mobile/viewports.html
+  *   http://www.quirksmode.org/mobile/metaviewport/devices.html
+  *   https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html
+-->
+
+		<!-- <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1"> -->
+		<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=no">
+		<!-- <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes, minimum-scale=1, maximum-scale=2"> -->
+
+		<style>
+			/* following three (cascaded) are equivalent to above three meta viewport statements */
+			/* see http://www.quirksmode.org/blog/archives/2014/05/html5_dev_conf.html */
+			/* see http://dev.w3.org/csswg/css-device-adapt/ */
+			
+			@-ms-viewport {
+				width: 100vw;
+				min-zoom: 100%;
+				zoom: 100%;
+			}
+			
+			@viewport {
+				width: 100vw;
+				min-zoom: 100% zoom: 100%;
+			}
+			
+			@-ms-viewport {
+				user-zoom: fixed;
+				min-zoom: 100%;
+			}
+			
+			@viewport {
+				user-zoom: fixed;
+				min-zoom: 100%;
+			}
+			/*@-ms-viewport { user-zoom: zoom ; min-zoom: 100% ; max-zoom: 200% ; }   @viewport { user-zoom: zoom ; min-zoom: 100% ; max-zoom: 200% ; }*/
+		</style>
+
+		<link rel="stylesheet" href="css/app.css">
+		<link rel="stylesheet" href="css/botones.css">
+		<link rel="stylesheet" type="text/css" href="css/index_main.less.css" class="main-less">
+
+		<!-- IMPORTANT: Do not include a weinre script tag as part of your release builds! -->
+		<!-- Place your remote debugging (weinre) script URL from the Test tab here, if it does not work below -->
+		<!-- <script src="http://debug-software.intel.com/target/target-script-min.js#insertabiglongfunkynumberfromthexdkstesttab"></script> -->
+
+		<!-- Recommended location for your JavaScript libraries -->
+		<!-- These library references (below) are just examples to give you the general idea... -->
+		<!-- <script src="lib/mc/hammer.js"></script> -->
+		<!-- <script src="lib/ft/fastclick.js"></script> -->
+
+		<!--
+  * cordova.js is a phantom lib for "Cordova HTML5 web app," it does nothing in a "Standard HTML5 web app"
+  * Seeing a "Failed to load resource: net::ERR_FILE_NOT_FOUND" message caused by this "cordova.js" script?
+  * The cordova.js script is required if you convert your "Standard HTML5" project into a "Cordova" project.
+  * You can safely ignore the error or comment out this line if you will not be developing a Cordova app.
+-->
+		<script src="cordova.js" id="xdkJScordova_"></script>
+
+		<script src="js/app.js"></script>
+		<script src="js/msn.js"></script>
+		<!-- for your event code, see README and file comments for details -->
+		<script src="js/init-app.js"></script>
+		<!-- for your init code, see README and file comments for details -->
+		<script src="xdk/init-dev.js"></script>
+		<!-- normalizes device and document ready events, see file for details -->
+		<script type="application/javascript" src="lib/jquery.min.js"></script>
+		<script type="application/javascript" src="marginal/marginal-position.min.js"></script>
+		<script type="application/javascript" src="js/index_user_scripts.js"></script>
+		<script type="application/javascript" src="xdk/ad/bs_subpage.js"></script>
+		<script type="application/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+		<script type="application/javascript" src="google_maps/goom.js"></script>
+		<script type="application/javascript" src="js/gps.js"></script>
+		<script type="application/javascript" src="js/rating.js"></script>
+		<script type="application/javascript" src="js/solicitud.js"></script>
+		<script type="application/javascript" src="js/servicio.js"></script>
+		<script type="application/javascript" src="js/encoder.js"></script>
+		<script type="application/javascript" src="js/error-handler.js"></script>
+		<script type="application/javascript" src="xdk/appdesigner/js/rest-of-space.js"></script>
+		<!--<script type="application/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBFeSlIAjDg8U7zsWW82uJCNLi3IZxq9fI;callback=mapsCallback" async defer></script>-->
+		<!--<script src="http://debug-software.intel.com/target/target-script-min.js#cNUwOtALdUnKdORPPk8ky93ciJ08FZElO0vZvliS6tE"></script>-->
+
+	</head>
+
+	<body>
+        <input class="wide-control form-control default" type="text" placeholder="..." id="estado-input" disabled="">
+        <input type="button" name="convertir" value="convertir" id="convertir">
+	</body>
+
+</html>
+
+<script>
+
+    $('#convertir').click(function(){
+        $("#estado-input").replaceWith('<select id="estado-input" name="estado-input" class="wide-control form-control default input-lg">' +
+              '<option value="--">--</option>' +
+              '<option value="Distrito Capital">Distrito Capital</option>' +
+              '<option value="Amazonas">Amazonas</option>' +
+              '<option value="Anzoátegui">Anzoátegui</option>' +
+              '<option value="Apure">Apure</option>' +
+              '<option value="Aragua">Aragua</option>' +
+              '<option value="Barinas">Barinas</option>' +
+              '<option value="Bolívar">Bolívar</option>' +
+              '<option value="Carabobo">Carabobo</option>' +
+              '<option value="Cojedes">Cojedes</option>' +
+              '<option value="Delta amacuro">Delta amacuro</option>' +
+              '<option value="Falcón">Falcón</option>' +
+              '<option value="Guárico">Guárico</option>' +
+              '<option value="Lara">Lara</option>' +
+              '<option value="Mérida">Mérida</option>' +
+              '<option value="Miranda">Miranda</option>' +
+              '<option value="Monagas">Monagas</option>' +
+              '<option value="Nueva esparta">Nueva esparta</option>' +
+              '<option value="Portuguesa">Portuguesa</option>' +
+              '<option value="Sucre">Sucre</option>' +
+              '<option value="Táchira">Táchira</option>' +
+              '<option value="Trujillo">Trujillo</option>' +
+              '<option value="Vargas">Vargas</option>' +
+              '<option value="Yaracuy">Yaracuy</option>' +
+              '<option value="Zulia">Zulia</option>' +
+            '</select>');
+    });
+</script>
+									
