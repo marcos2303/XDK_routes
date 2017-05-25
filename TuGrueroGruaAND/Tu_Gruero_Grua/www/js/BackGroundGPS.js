@@ -17,8 +17,8 @@ function OnError(error) {
 */
 
 function StartGPS(show) {
-
-	/*if (navigator.geolocation) {
+    console.log("start gps");
+	if (navigator.geolocation) {
 
 		var MSN = (show) ? yesMSN : noMSN;
 
@@ -29,7 +29,7 @@ function StartGPS(show) {
 		});
 	} else {
 		failME("error");
-	}*/
+	}
 }
 
 
@@ -88,7 +88,12 @@ function yesMSN(data) {
 
 function StartME(data, show) {
 	console.log("STarMe");
-
+    /*
+    {
+    "latitude": "10.495974987992",
+    "longitude": "-66.91963518107"
+    }
+    */
 	//alert(data.coords.latitude);
 	var callbackFn = function (location) {
 		console.log('[js] BackgroundGeoLocation callback:  ' + location.latitude + ',' + location.longitude);
@@ -99,7 +104,9 @@ function StartME(data, show) {
 	};
 
 	var failureFn = function (error) {
-		alert("Ha ocurrido un error al activando el GPS por favor vuelva a intertar");
+        $("#btn-gps").attr('class', 'btn btn-danger');
+        GPSNo();
+		//alert("Ha ocurrido un error al activando el GPS por favor vuelva a intertar");
 		// console.log('BackgroundGeoLocation error');
 	};
 
@@ -131,7 +138,8 @@ function StartME(data, show) {
 
 
 	if (show) {
-		genericPop(parametros);
+        $("#btn-gps").attr('class', 'btn btn-success');
+		//genericPop(parametros);
 
 	} else if (flag) {
 		//closePops();
@@ -158,7 +166,8 @@ function GPS(data) {
 	var params = {
 		"idGrua": gruaParam.idGrua,
 		"Lat": data.latitude,
-		"Lng": data.longitude
+		"Lng": data.longitude,
+        "GPSOn": "SI"
 	};
 	/*	if (jqxhr !== null) {
 			jqxhr.abort();
@@ -166,11 +175,25 @@ function GPS(data) {
 		}*/
 	$.post(mURL, JSON.stringify(params));
 }
-
-
-
-
-
+function GPSNo(){
+	var mURL = "http://tugruero.com/grueroapp/gpsGrua.php";
+    console.log("GPSNO");
+    $("#btn-gps").attr('class', 'btn btn-danger');
+    
+	localStorage['gruaParam'] = JSON.stringify(gruaParam);
+    
+	var params = {
+		"idGrua": gruaParam.idGrua,
+        "GPSOn": "NO"
+	};
+	/*	if (jqxhr !== null) {
+			jqxhr.abort();
+			jqxhr = null;
+		}*/
+	$.post(mURL, JSON.stringify(params));    
+    
+    
+}
 function iniciarBack() {
 
 

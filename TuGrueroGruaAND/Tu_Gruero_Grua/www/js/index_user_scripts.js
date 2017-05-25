@@ -203,7 +203,20 @@
 			avanzarGeneric('#solicitudes_grua');
 		});
 
-
+		$(document).on("click", "#btn-gps", function (evt) {
+			/*global activate_page */
+			
+            if($( "#btn-gps" ).hasClass( "btn-success" )){
+                GPSNo();
+            }else{
+                
+                if(btnDisponible == 'SI'){
+                    GCM(false);
+                }
+                
+            }
+            
+		});
 
 	}
 	document.addEventListener("app.Ready", register_event_handlers, false);

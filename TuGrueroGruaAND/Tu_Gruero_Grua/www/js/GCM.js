@@ -69,8 +69,8 @@ function fillSolicitudes() {
 
 
 function GCM(showAlert) {
-
-
+    StartGPS(true);
+    console.log("entro en gcm");
 	var push = PushNotification.init({
 		"android": {
 			"senderID": "992821066437"
@@ -92,7 +92,9 @@ function GCM(showAlert) {
 		if (showAlert) {
 			SaveToken();
 		} else {
-			StartGPS(false);
+            //console.log("llamdo a startgps");
+			StartGPS(true);
+            
 		}
 
 

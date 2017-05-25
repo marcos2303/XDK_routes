@@ -11,8 +11,6 @@ var params = {
 	"Placa": "",
 	"Clave": ""
 };
-
-
 var gruaParam = {
 	"idGrua": "3",
 	"mToken": "",
@@ -45,7 +43,7 @@ var mlatlng = ""; //GPS origen corregido
 var grualatlng = "";
 
 var vistos = [false, false, false, false, false];
-
+var btnDisponible = 'NO';
 //localStorage['gruaParam'] = JSON.stringify(gruaParam);
 //console.log(JSON.parse(localStorage['gruaParam']));
 
@@ -57,8 +55,6 @@ function Sonido() {
 		console.log("try failed:", e);
 	}
 }
-
-
 
 //Administra la ventana de Adevertencia al inicio
 function Advertencia(accion) {
@@ -148,7 +144,7 @@ function Sincronizar() {
 
 			genericPop(param);
 			GCM(true);
-			//	StartGPS();
+            StartGPS();
 		}
 
 	}
@@ -156,7 +152,7 @@ function Sincronizar() {
 
 
 function checkTerminos() {
-
+    localStorage.terminos = "Si";
 	if (localStorage.terminos === "Si") {
 		avanzarGeneric("#datos_inicio");
 	} else {
@@ -310,6 +306,7 @@ function verificacion() {
 	params.Placa = $('#placa').val().toUpperCase().replace(/[^a-zA-Z0-9]/g, '');
 	params.Clave = $('#clave').val();
 	params.UUID = device.uuid;
+        params.UUID = device.uuid;
 	console.log(params.UUID);
 	var OK = cedulaCheck($('#cedula').val()) ? placaCheck(params.Placa, $('#placa').val()) ? ClaveCheck(params.Clave) ? preEnvio() : false : false : false;
 }
@@ -636,13 +633,13 @@ function ErrorLogin(error) {
 
 
 function PreSelect(tipo) {
-	console.log(tipo);
+	//console.log(tipo);
 
 	if (tipo === "NO") {
+        $("#btn-gps").attr('class', 'btn btn-danger');
 		$('#btn-disponible-next').attr('disabled', 'disabled');
         $('#input-estado').attr('disabled', 'disabled');
 	} else {
-
 		$('#btn-disponible-next').removeAttr('disabled');
         $('#input-estado').removeAttr('disabled');
 	}
@@ -680,7 +677,8 @@ function seleccionar(boton) {
 	if (boton !== selBtn) {
 		resetBtn();
 		Disponible($(boton).val());
-
+        btnDisponible = $(boton).val();
+        console.log("Disponible " + btnDisponible);
 	}
 	selBtn = boton;
 
@@ -716,9 +714,12 @@ function Disponible(valor) {
 
         
 	} else {
+        $("#btn-gps").attr('class', 'btn btn-danger');
         $('#input-estado').attr('disabled', 'disabled');
 		$('#btn-disponible-next').attr('disabled', 'disabled');
-		AjaxCall("activarGruaN.php", parametros, SuccessActivar, ErrorActivar, "NO");
+        AjaxCall("activarGruaN.php", parametros, SuccessActivar, ErrorActivar, "NO");
+        GPSNo();
+		
 
 
 	}
