@@ -216,7 +216,7 @@ function UbicarEnMapa(mapa, mLatlng) {
 
 function refreshGruaPos() {
         
-        console.log('refresh grua');
+        //console.log('refresh grua');
 	mapa = mapas.Trayecto;
 	//console.log("newCall");
 	gpsMarcadores.Grua = grualatlng;
