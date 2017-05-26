@@ -197,18 +197,6 @@ function makeMapa(mID, mlatlng) {
 
 	var mapOptions = {};
 	mapOptions.zoom = 15;
-        if(mID == 'mapaorigen')
-        {
-          mapOptions.zoom = 20;  
-        }
-        if(mID == 'mapadestino')
-        {
-          mapOptions.zoom = 20;  
-        }
-        if(mID == 'mapatrayecto')
-        {
-          mapOptions.zoom = 20;  
-        }  
 	mapOptions.center = mlatlng;
 	//console.log("REVERTIR");
 	mapOptions.disableDefaultUI = true;
@@ -248,6 +236,12 @@ function refreshGruaPos() {
                             console.log('Directions request failed due to ' + status);
                         }
                     });
+                    
+        if(GPSOn !='SI'){
+             directionsDisplay.setMap(null);
+        }else{
+            directionsDisplay.setMap(mapas.Trayecto);
+        }
 
 	
 

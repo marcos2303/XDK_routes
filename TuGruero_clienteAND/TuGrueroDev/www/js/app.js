@@ -80,7 +80,6 @@ var navegacion = ['#datos_inicio'];
 var mlatlng = ""; //GPS origen corregido
 var carrolatlng = "";
 var grualatlng = "";
-
 var btnTermino;
 
 
@@ -1275,6 +1274,7 @@ function mostrarTerminos() {
 
 
 function resetApp() {
+        console.log('reset app');
 	closePops();
 	jqxhr = null; //Variable para envair consultas
 	callInterval = "";
@@ -1284,7 +1284,8 @@ function resetApp() {
 		"ID": "V",
 		"Cedula": "",
 		"Placa": "",
-		"Seguro": ""
+		"Seguro": "",
+                "Asegurado": "SI"
 	};
 
 	misDatos = null;
@@ -1297,7 +1298,9 @@ function resetApp() {
 	localStorage.Etapa = undefined;
 	mlatlng = ""; //GPS origen corregido
 	grualatlng = "";
-
+        GPSOn = 'NO';
+        directionsDisplay = null;
+        directionsService = null;
 
 	solicitud = {
 		"idPoliza": "",
@@ -1309,7 +1312,8 @@ function resetApp() {
 		"CellContacto": "",
 		"Parametros": "",
 		"OtraFalla": "",
-		"InfoAdicional": ""
+		"InfoAdicional": "",
+                "Asegurado": "SI"
 	};
 
 	$('#cedula').val("");

@@ -106,6 +106,7 @@ function refrescarGrua() {
 function gruaCheck(data) {
 
 	grualatlng = new google.maps.LatLng(data.Latitud, data.Longitud);
+        GPSOn = data.GPSOn;
 	refreshGruaPos();
 	console.log(data);
 
