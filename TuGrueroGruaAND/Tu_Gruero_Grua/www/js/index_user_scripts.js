@@ -43,7 +43,7 @@
 		});
 
 
-		$(document).on("touchend", "#btn-check", function (evt) {
+		$(document).on("click", "#btn-check", function (evt) {
 			aceptarTerminos(this);
 		});
 
@@ -206,15 +206,15 @@
 		$(document).on("click", "#btn-gps", function (evt) {
 			/*global activate_page */
 			
-            if($( "#btn-gps" ).hasClass( "btn-success" )){
+            /*if($( "#btn-gps" ).hasClass( "btn-success" )){
                 GPSNo();
             }else{
                 
                 if(btnDisponible == 'SI'){
-                    GCM(false);
+                    startGPS(true);
                 }
                 
-            }
+            }*/
             
 		});
 

@@ -636,7 +636,7 @@ function PreSelect(tipo) {
 	//console.log(tipo);
 
 	if (tipo === "NO") {
-        $("#btn-gps").attr('class', 'btn btn-danger');
+        $("#btn-gps").attr('class', 'alert alert-danger');
 		$('#btn-disponible-next').attr('disabled', 'disabled');
         $('#input-estado').attr('disabled', 'disabled');
 	} else {
@@ -714,11 +714,12 @@ function Disponible(valor) {
 
         
 	} else {
-        $("#btn-gps").attr('class', 'btn btn-danger');
+        $("#btn-gps").attr('class', 'alert alert-danger');
         $('#input-estado').attr('disabled', 'disabled');
 		$('#btn-disponible-next').attr('disabled', 'disabled');
+        
         AjaxCall("activarGruaN.php", parametros, SuccessActivar, ErrorActivar, "NO");
-        GPSNo();
+        
 		
 
 
@@ -782,6 +783,7 @@ function SuccessActivar(response, valor) {
 
 		} else {
 			$('#btn-disponible-next').attr('disabled', 'disabled');
+            GPSNo();
 			StopGPS();
 			closePops();
 		}
@@ -1623,6 +1625,7 @@ function ResetApp() {
 	laSolicitud = null;
 	RemoveList(mId);
 	StopGPS();
+    btnDisponible = 'NO';
 	$('#btn-disponible-next').attr('disabled', 'disabled');
 	$('#btn-fin-servicio').attr('disabled', 'disabled');
 	$('#btn-fin-servicio').removeClass('btn-success').addClass('btn-base');

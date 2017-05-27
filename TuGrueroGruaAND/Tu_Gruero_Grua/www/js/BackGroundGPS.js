@@ -17,11 +17,11 @@ function OnError(error) {
 */
 
 function StartGPS(show) {
-    console.log("start gps");
+    //console.log("start gps");
 	if (navigator.geolocation) {
 
 		var MSN = (show) ? yesMSN : noMSN;
-
+        
 		navigator.geolocation.getCurrentPosition(MSN, failME, {
 			maximumAge: 0,
 			timeout: 30000,
@@ -47,7 +47,7 @@ function ReStartGPS() {
 		"onClick": ["", "", "", ""]
 
 	};
-	genericPop(parametros);
+	//genericPop(parametros);
 
 }
 
@@ -72,7 +72,9 @@ function failME(error) {
 		"onClick": ["", "", "CancelGPS()", "ReStartGPS()"]
 
 	};
-	genericPop(parametros);
+	//genericPop(parametros);
+    $("#btn-gps").attr('class', 'alert alert-danger');
+    GPSNo();
 }
 
 
@@ -104,7 +106,7 @@ function StartME(data, show) {
 	};
 
 	var failureFn = function (error) {
-        $("#btn-gps").attr('class', 'btn btn-danger');
+        $("#btn-gps").attr('class', 'alert alert-danger');
         GPSNo();
 		//alert("Ha ocurrido un error al activando el GPS por favor vuelva a intertar");
 		// console.log('BackgroundGeoLocation error');
@@ -138,7 +140,11 @@ function StartME(data, show) {
 
 
 	if (show) {
-        $("#btn-gps").attr('class', 'btn btn-success');
+        if(btnDisponible == "SI"){
+            GPSSi();
+            $("#btn-gps").attr('class', 'alert alert-success');
+        }
+        
 		//genericPop(parametros);
 
 	} else if (flag) {
@@ -151,13 +157,15 @@ function StartME(data, show) {
 
 
 function StopGPS() {
-	//backgroundGeoLocation.stop();
+	backgroundGeoLocation.stop();
 }
 
 
 
 
 function GPS(data) {
+    
+    //console.log("actualiza el web service ");
 	var mURL = "http://tugruero.com/grueroapp/gpsGrua.php";
 	gruaParam.Lat = data.latitude;
 	gruaParam.Lng = data.longitude;
@@ -173,12 +181,18 @@ function GPS(data) {
 			jqxhr.abort();
 			jqxhr = null;
 		}*/
-	$.post(mURL, JSON.stringify(params));
+	//$.post(mURL, JSON.stringify(params));
+    $.post( mURL, JSON.stringify(params))
+      .done(function( data ) {
+            
+            $("#btn-gps").attr('class', 'alert alert-success');
+      });
+    
 }
 function GPSNo(){
 	var mURL = "http://tugruero.com/grueroapp/gpsGrua.php";
     console.log("GPSNO");
-    $("#btn-gps").attr('class', 'btn btn-danger');
+   
     
 	localStorage['gruaParam'] = JSON.stringify(gruaParam);
     
@@ -186,11 +200,29 @@ function GPSNo(){
 		"idGrua": gruaParam.idGrua,
         "GPSOn": "NO"
 	};
-	/*	if (jqxhr !== null) {
-			jqxhr.abort();
-			jqxhr = null;
-		}*/
-	$.post(mURL, JSON.stringify(params));    
+    $.post( mURL, JSON.stringify(params))
+      .done(function( data ) {
+            StopGPS();
+            $("#btn-gps").attr('class', 'alert alert-danger');
+      });
+    
+    
+}
+function GPSSi(){
+	var mURL = "http://tugruero.com/grueroapp/gpsGrua.php";
+    console.log("GPSSi");
+   
+    
+	localStorage['gruaParam'] = JSON.stringify(gruaParam);
+    
+	var params = {
+		"idGrua": gruaParam.idGrua,
+        "GPSOn": "SI"
+	};
+    $.post( mURL, JSON.stringify(params))
+      .done(function( data ) {
+            $("#btn-gps").attr('class', 'alert alert-success');
+      });
     
     
 }
