@@ -148,9 +148,11 @@ function verificacion() {
         //console.log(params.Asegurado);
         
         if(params.Asegurado == "SI"){
+            $("#span-solicitar").html('Solicitar');
             var OK = cedulaCheck($('#cedula').val()) ? placaCheck(params.Placa, $('#placa').val()) ? seguroCheck(params.Seguro) ? preEnvio() : false : false : false;
   
         }else{
+            $("#span-solicitar").html('Pagar y Solicitar');
             var OK = cedulaCheck($('#cedula').val()) ? placaCheck(params.Placa, $('#placa').val())  ?  avanzarGeneric("#noasegurado") : false : false ;
 
         }
