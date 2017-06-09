@@ -1283,7 +1283,21 @@ function resetApp() {
 	closePops();
 	jqxhr = null; //Variable para envair consultas
 	callInterval = "";
-
+        var params = {
+            "ID": "V",
+            "Cedula": "",
+            "Placa": "",
+            "Seguro": "",
+            "Asegurado": "SI",
+            "Nombres": "",
+            "Apellidos": "",
+            "Marca": "",
+            "Modelo": "",
+            "Anio": "",
+            "Color": "",
+            "Clase": "",
+            "Tipo": "N/A"
+        };
 	//var params = "";
 	params = {
 		"ID": "V",
@@ -1306,7 +1320,7 @@ function resetApp() {
         GPSOn = 'NO';
         directionsDisplay = null;
         directionsService = null;
-
+        
 	solicitud = {
 		"idPoliza": "",
 		"latOrigen": "",
