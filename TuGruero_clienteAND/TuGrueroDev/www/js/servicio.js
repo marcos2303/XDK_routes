@@ -112,7 +112,7 @@ function gruaCheck(data) {
 
 	switch (data.EstatusGrua) {
 	case "Activo":
-		callInterval = setTimeout(refrescarGrua, 15000);
+		callInterval = setTimeout(refrescarGrua, 25000);
 		break;
 
 	case "Asistiendo":

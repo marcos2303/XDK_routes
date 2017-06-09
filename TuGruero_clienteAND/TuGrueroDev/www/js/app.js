@@ -1100,8 +1100,11 @@ function siguienteAjustar() {
 	reverseGeoDestino(mlatlng);
         
         if(params.Asegurado=='NO' ){
+            $('#btn-solicitar-text').html('Pagar y Solicitar');
             //console.log('Entro en Asegurado = NO');
             getPrecio();
+        }else{
+            $('#btn-solicitar-text').html('Solicitar');
         }
             
         
